@@ -1,12 +1,14 @@
-import logo from './logo.svg'
 import React from "react";
 import './App.scss';
+import {Helmet} from "react-helmet";
+
 
 import Header from './components/Header.js';
 import HomeBanner from "./components/HomeBanner";
 import Login from "./components/Login";
-import Banner from "./components/Banner";
-import List from "./components/List";
+import Banner from "./components/BrowsePage/Banner";
+import Row from './components/BrowsePage/Row';
+import requests from './components/BrowsePage/requests'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Headersignout from "./components/Headersignout";
 import FooterCompound from "./compounds/FooterCompound";
@@ -21,6 +23,12 @@ import AccordionCompound from "./compounds/AccordionCompound";
 function App() {
   return (
     <React.Fragment>
+      <Helmet>
+                <meta charSet="utf-8" />
+                <title>Netflix</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+                <meta name="description" content="Netflix" />
+      </Helmet>
       <Router>
         <Routes>
           <Route path="/" element={
@@ -54,14 +62,19 @@ function App() {
           <Route path="/dashboard" element={
             <React.Fragment>
               <Headersignout/>
-              <Banner/>
-              <List title="Netflix Originals" param="originals"/>
-              <List title="Trending Now" param="trending"/>
-              <List title="Now Playing" param="now_playing"/>
-              <List title="popular" param="popular"/>
-              <List title="Top Rated" param="top_rated"/>
-              <List title="Upcoming" param="upcoming"/>
-              <FooterCompound/>
+              <Banner />
+        <Row 
+        title = "NETFLIX ORIGINALS" 
+        fetchUrl = {requests.fetchNetFlixOriginals}
+        isLargeRow = {true}
+        />
+        <Row title = "Trending Now" fetchUrl = {requests.fetchTreding}/>
+        <Row title = "Top Rated" fetchUrl = {requests.fetchTopRated}/>
+        <Row title = "Action Movies" fetchUrl = {requests.fetchActionMovies}/>
+        <Row title = "Horror Movies" fetchUrl = {requests.fetchHorroMovies}/>
+        <Row title = "Romance Movies" fetchUrl = {requests.fetchRomanticMovies}/>
+        <Row title = "Documentaries" fetchUrl = {requests.fetchDocumentaries}/>
+        <FooterCompound/>
             </React.Fragment>
           }/>
         </Routes>
