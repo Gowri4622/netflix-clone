@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./OptFormStyles.css";
 
-function optFormButton({ children, ...restProps }) {
+function OptFormButton({ children, ...restProps }) {
+  const navigate = useNavigate();
+
+  const onclickHandler = () =>{
+    navigate('/register');
+  }
   return (
     <div>
-      <a className="optform-button" href="/register" {...restProps}>
+      <a className="optform-button" onClick={onclickHandler} {...restProps}>
         {children}
         <img
           className="optform-button-image"
@@ -16,4 +22,4 @@ function optFormButton({ children, ...restProps }) {
   );
 }
 
-export default optFormButton;
+export default OptFormButton;
