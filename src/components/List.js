@@ -4,8 +4,9 @@ import { fetchData } from "../api/api";
 const List = ({ title, param }) => {
   const [list, setList] = useState([]);
   useEffect(()=>{
-    fetchData(param).then( res => setList(res.data.results))
-  },[]);
+    fetchData(param)
+    .then( res => setList(res.data.results))
+  },[param]);
   console.log(list)
   return(
     <div className="list">
